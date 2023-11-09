@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Fog
   - Smoke
+  - Mouth
+  - Meat1RB
+  - HoleBarrier
+  - Meat2RB
+  - Meat3RB
   layers:
   - Default
   - TransparentFX
