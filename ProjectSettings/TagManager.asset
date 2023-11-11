@@ -11,6 +11,7 @@ TagManager:
   - HoleBarrier
   - Meat2RB
   - Meat3RB
+  - Powerup
   layers:
   - Default
   - TransparentFX

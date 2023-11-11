@@ -137,6 +137,13 @@ public class PlayerController : MonoBehaviour
             canTakeDamage = true;
             StartCoroutine(DoTickDamage(damagePerSecond));
         }
+        else if (other.CompareTag("Powerup"))
+        {
+            isInvincible = true;
+            canTakeDamage = false;
+            Destroy(other.gameObject);
+            StartCoroutine(PowerupCountdown());
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -163,6 +170,13 @@ public class PlayerController : MonoBehaviour
                 break;
             }
         }
+    }
+
+    IEnumerator PowerupCountdown()
+    {
+        yield return new WaitForSeconds(60);
+        isInvincible = false;
+        canTakeDamage = true;
     }
 
     void die()
