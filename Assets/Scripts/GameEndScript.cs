@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameEndScript : MonoBehaviour
 {
@@ -8,8 +11,7 @@ public class GameEndScript : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            Destroy(other.gameObject);
-            Debug.Log("The game is over, gg");
+            SceneManager.LoadScene("EndOfGame");
         }
     }
 }

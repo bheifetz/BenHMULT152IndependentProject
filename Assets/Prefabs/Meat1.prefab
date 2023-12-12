@@ -50,6 +50,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3732750350621366578}
   - component: {fileID: 3776379336489979983}
+  - component: {fileID: 1508351181}
   m_Layer: 0
   m_Name: Meat1
   m_TagString: Untagged
@@ -86,6 +87,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1508351181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3826816195428449369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd343125ba317bb4b9c6a5a69f6c438b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6186257325694088468
 GameObject:
   m_ObjectHideFlags: 0

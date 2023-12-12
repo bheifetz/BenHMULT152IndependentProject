@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -23,12 +25,18 @@ public class PlayerController : MonoBehaviour
 
     public ParticleSystem blood;
 
-    private int health = 30;
+    public TextMeshProUGUI healthText;
+    public TextMeshProUGUI deathText;
+    public TextMeshProUGUI getMoving;
+    public Button restartButton;
+
+    public int health = 30;
     private int damagePerSecond = 3;
     public bool isGameOver = false;
     public bool canMove = true;
     public bool canTakeDamage = false;
     public bool isInvincible = false;
+    public bool hasMeat;
 
     //meat counter (should be an array with 3 slots)
     public int currentMeat = 1;
@@ -39,6 +47,11 @@ public class PlayerController : MonoBehaviour
         hole = GameObject.Find("Gluttonous Hole").GetComponent<GameObject>();
         animPlayer = GetComponent<Animator>();
         audioPlayer = GetComponent<AudioSource>();
+
+        healthText.gameObject.SetActive(true);
+        deathText.gameObject.SetActive(false);
+        restartButton.gameObject.SetActive(false);
+        hasMeat = false;
     }
 
     // Update is called once per frame
@@ -127,10 +140,16 @@ public class PlayerController : MonoBehaviour
         else if(other.CompareTag("HoleBarrier"))
         {
             canMove = false;
-            Rigidbody meatBody = meats[currentMeat-1].GetComponent<Rigidbody>();
-            Vector3 launchPos = new Vector3(transform.localPosition.x - 3, transform.localPosition.y + 1, transform.localPosition.z);
-            Instantiate(meats[currentMeat - 1], launchPos, transform.rotation);
-            meatBody.AddForce((Vector3.up * forceMultiplier), ForceMode.Impulse);
+            if (hasMeat)
+            {
+                Rigidbody meatBody = meats[currentMeat - 1].GetComponent<Rigidbody>();
+                Vector3 launchPos = new Vector3(transform.localPosition.x - 3, transform.localPosition.y + 1, transform.localPosition.z);
+                Instantiate(meats[currentMeat - 1], launchPos, transform.rotation);
+                meatBody.AddForce((Vector3.up * forceMultiplier), ForceMode.Impulse);
+                hasMeat = false;
+            }
+            else if (!hasMeat)
+                StartCoroutine(WhyAreYouStillHere());
         }
         else if (other.CompareTag("Fog") && !isInvincible)
         {
@@ -163,7 +182,8 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(3);
             health -= tickDmg;
             blood.Play();
-            Debug.Log("My health is currently at: " + health);
+            //Debug.Log("My health is currently at: " + health);
+            UpdateHealth();
             if (health <= 0)
             {
                 die();
@@ -179,11 +199,29 @@ public class PlayerController : MonoBehaviour
         canTakeDamage = true;
     }
 
+    IEnumerator WhyAreYouStillHere()
+    {
+        getMoving.gameObject.SetActive(true);
+        yield return new WaitForSeconds(5);
+        getMoving.gameObject.SetActive(false);
+        canMove = true;
+    }
+
     void die()
     {
         isGameOver = true;
         audioPlayer.PlayOneShot(damage, 1.0f);
         blood.Play();
         animPlayer.SetBool("Death_b", true);
+
+        //UI management
+        deathText.gameObject.SetActive(true);
+        restartButton.gameObject.SetActive(true);
+        healthText.gameObject.SetActive(false);
+    }
+
+    void UpdateHealth()
+    {
+        healthText.text = "Health: " + health;
     }
 }

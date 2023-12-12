@@ -130,11 +130,19 @@ MonoBehaviour:
   - {fileID: 3826816195428449369, guid: 96fd1444cd002d142b4f1533e0a876dc, type: 3}
   - {fileID: 3826816195428449369, guid: 45f06e1a48fe6c145b3645b57d67fcd5, type: 3}
   - {fileID: 3826816195428449369, guid: 575d23933ce8b464f935fe1447b27ea5, type: 3}
-  forceMultiplier: 10
+  forceMultiplier: 50
   damage: {fileID: 8300000, guid: 0d45ccbf57af61f478a643b2f1983aaa, type: 3}
-  blood: {fileID: 8386750554085868056, guid: 80d5b95d9582c634095b9eb8d39af25d, type: 3}
+  blood: {fileID: 6866562415421000789}
+  healthText: {fileID: 0}
+  deathText: {fileID: 0}
+  getMoving: {fileID: 0}
+  restartButton: {fileID: 0}
+  health: 9
   isGameOver: 0
   canMove: 1
+  canTakeDamage: 0
+  isInvincible: 0
+  hasMeat: 0
   currentMeat: 1
 --- !u!54 &7262904762711656728
 Rigidbody:
@@ -566,6 +574,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80d5b95d9582c634095b9eb8d39af25d, type: 3}
+--- !u!198 &6866562415421000789 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8386750554085868056, guid: 80d5b95d9582c634095b9eb8d39af25d, type: 3}
+  m_PrefabInstance: {fileID: 3110112758724480589}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7387168484254591750 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5597175591097492811, guid: 80d5b95d9582c634095b9eb8d39af25d, type: 3}
